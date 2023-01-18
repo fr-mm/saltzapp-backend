@@ -29,15 +29,14 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
 INSTALLED_APPS = [
+    "chat.apps.ChatConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "chat",
     "rest_framework"
 ]
 
@@ -78,7 +77,7 @@ WSGI_APPLICATION = "saltzapp_backend.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'student',
+        'NAME': 'chat-db',
         'CLIENT': {
             'host': 'mongodb://mongodb:27017',
             'username': 'root',

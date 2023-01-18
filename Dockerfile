@@ -5,3 +5,5 @@ RUN mkdir /main
 WORKDIR /main
 COPY . /main/
 RUN pip install -r requirements.txt
+RUN pip uninstall pymongo -y
+RUN pip install pymongo==3.12.3

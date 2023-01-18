@@ -1,0 +1,1 @@
+Boilerplate inspirado em https://github.com/rishi772001/Django-MongoDb-CRUD-RESTAPI

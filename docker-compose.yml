@@ -7,6 +7,7 @@ volumes:
 services:
   mongodb:
     image: mongo
+    container_name: db
     restart: always
     volumes:
       - ./init-db:/docker-entrypoint-initdb.d
@@ -20,10 +21,11 @@ services:
 
   web:
     image: app
+    container_name: web
     restart: always
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/django_mongodb_docker
+      - .:/main
     ports:
       - 8000:8000
     links:
@@ -36,7 +38,7 @@ services:
     image: app
     command: python manage.py migrate
     volumes:
-      - .:/django_mongodb_docker
+      - .:/main
     links:
       - mongodb
     depends_on:
@@ -47,7 +49,7 @@ services:
     image: app
     command: python manage.py makemigrations
     volumes:
-      - .:/django_mongodb_docker
+      - .:/main
     links:
       - mongodb
     depends_on:
