@@ -35,7 +35,7 @@ class TestRotaMensagens(TestCase):
 
         self.assertEqual(response.status_code, 400)
 
-    def test_post_QUANDO_payload_valido_ENTAO_cria_usuario(self) -> None:
+    def test_post_QUANDO_payload_valido_ENTAO_cria_mensagem(self) -> None:
         self.post(self.payload)
 
         Mensagem.objects.get(origem_id=self.usuario_origem.id)

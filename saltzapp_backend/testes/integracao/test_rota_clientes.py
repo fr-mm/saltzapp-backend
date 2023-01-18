@@ -32,7 +32,7 @@ class TestRotaClientes(TestCase):
 
         self.assertEqual(response.status_code, 400)
 
-    def test_post_QUANDO_payload_valido_ENTAO_cria_usuario(self) -> None:
+    def test_post_QUANDO_payload_valido_ENTAO_cria_cliente(self) -> None:
         self.post(self.payload)
 
         Cliente.objects.get(nome=self.payload['nome'])
