@@ -1,0 +1,1 @@
+from .cadastro_otd_serializer import CadastroOTDSerializer
