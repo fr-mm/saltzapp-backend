@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 
 @dataclass
-class CadastroOTD:
+class NovoClienteOTD:
     nome: str
-    senha: str
+    whatsapp: str
+    divida: float

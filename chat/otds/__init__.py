@@ -1,1 +1,2 @@
-from .cadastro_otd import CadastroOTD
+from .novo_usuario_otd import NovoUsuarioOTD
+from .novo_cliente_otd import NovoClienteOTD

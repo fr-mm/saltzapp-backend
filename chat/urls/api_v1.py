@@ -1,9 +1,10 @@
 from django.urls import path
-from rest_framework.authtoken import views
+from rest_framework.authtoken import views as auth_views
 
-from chat.views import UsuariosView
+from chat import views
 
 urlpatterns = [
-    path('usuarios/', UsuariosView.as_view(), name='usuarios'),
-    path('token/', views.obtain_auth_token)
+    path('usuarios/', views.UsuariosView.as_view(), name='usuarios'),
+    path('clientes/', views.ClientesView.as_view(), name='clientes'),
+    path('token/', auth_views.obtain_auth_token)
 ]
