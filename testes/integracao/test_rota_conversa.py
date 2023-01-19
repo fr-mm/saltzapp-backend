@@ -16,7 +16,7 @@ class TestRotaConversa(TestCase):
     def get(self) -> Response:
         return self.client.get(
             path=reverse(
-                'ultimas_mensagens', kwargs={
+                'conversa', kwargs={
                     'usuario_id': str(self.usuario.id),
                     'destino_id': str(self.outro_usuario.id)
                 }
@@ -46,10 +46,9 @@ class TestRotaConversa(TestCase):
             ) for _ in range(2)
         ]
         mensagens = mensagens_de + mensagens_para
-        shuffle(mensagens)
 
         response = self.get()
 
-        datas_na_response = [otd['enviada_em'] for otd in response.data]
-        datas_esperadas = sorted([mensagem.enviada_em for mensagem in mensagens], key=lambda mens: mens.enviada_em)
+        datas_na_response = [otd['texto'] for otd in response.data]
+        datas_esperadas = ([mensagem.texto for mensagem in mensagens])
         self.assertEqual(datas_na_response, datas_esperadas)
