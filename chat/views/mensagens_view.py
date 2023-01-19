@@ -8,7 +8,7 @@ from chat.otds import NovaMensagemOTD
 from chat.serializers import NovaMensagemOTDSerializer
 
 
-class MensagemsView(APIView):
+class MensagensView(APIView):
     def post(self, request: Request) -> Response:
         try:
             mensagem = self.__criar_mensagem(request)
