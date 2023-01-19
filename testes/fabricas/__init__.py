@@ -1,0 +1,2 @@
+from .fabrica_teste_usuario import FabricaTesteUsuario
+from .fabrica_teste_mensagem import FabricaTesteMensagem

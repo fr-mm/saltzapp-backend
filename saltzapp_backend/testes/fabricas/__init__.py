@@ -1,1 +1,0 @@
-from .fabrica_teste_usuario import FabricaTesteUsuario

@@ -14,12 +14,11 @@ class MensagemsView(APIView):
             serializer = NovaMensagemOTDSerializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             otd = NovaMensagemOTD(**serializer.validated_data)
-            mensagem = Mensagem(
+            Mensagem.criar(
                 origem_id=otd.origem_id,
                 destino_id=otd.destino_id,
                 texto=otd.texto
             )
-            mensagem.save()
             return Response(
                 status=201
             )

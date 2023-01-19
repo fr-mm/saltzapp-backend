@@ -5,7 +5,7 @@ from django.urls import reverse
 from rest_framework.response import Response
 
 from chat.models import Mensagem, Usuario
-from saltzapp_backend.testes.fabricas import FabricaTesteUsuario
+from testes.fabricas import FabricaTesteUsuario
 
 
 class TestRotaMensagens(TestCase):
