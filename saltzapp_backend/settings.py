@@ -93,7 +93,6 @@ DATABASES = {
             'authMechanism': 'SCRAM-SHA-1',
         }
     }
-
 }
 
 # Password validation

@@ -1,6 +1,6 @@
 from uuid import uuid4
 
-from django.db import models
+from djongo import models
 
 
 class Cliente(models.Model):

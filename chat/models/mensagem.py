@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from uuid import uuid4
 
-from django.db import models
+from djongo import models
 
 from chat.models.usuario import Usuario
 

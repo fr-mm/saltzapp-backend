@@ -1,4 +1,5 @@
 from .novo_usuario_otd_serializer import NovoUsuarioOTDSerializer
 from .novo_cliente_otd_serializer import NovoClienteOTDSerializer
 from .nova_mensagem_otd_serializer import NovaMensagemOTDSerializer
+from .mensagem_otd_serializer import MensagemOTDSerializer
 from .ultimas_mensagens_otd_serializer import UltimaMensagemOTDSerializer
