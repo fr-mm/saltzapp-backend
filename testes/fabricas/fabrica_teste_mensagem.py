@@ -3,6 +3,7 @@ from datetime import datetime
 import factory
 
 from chat.models import Mensagem
+from testes.fabricas import FabricaTesteUsuario
 
 
 class FabricaTesteMensagem(factory.django.DjangoModelFactory):
@@ -10,6 +11,6 @@ class FabricaTesteMensagem(factory.django.DjangoModelFactory):
         model = Mensagem
 
     enviada_em = factory.Faker('date_time', end_datetime=datetime.now())
-    origem_id = factory.Faker('uuid4')
-    destino_id = factory.Faker('uuid4')
+    origem = factory.SubFactory(FabricaTesteUsuario)
+    destino = factory.SubFactory(FabricaTesteUsuario)
     texto = factory.Faker('sentence')

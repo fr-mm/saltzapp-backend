@@ -4,7 +4,8 @@ from django.test import TestCase
 from django.urls import reverse
 from rest_framework.response import Response
 
-from chat.models import Usuario
+from chat.models import Usuario, Mensagem, UltimaMensagem
+from testes.fabricas import FabricaTesteUsuario
 
 
 class TestRotaUsuarios(TestCase):
@@ -35,3 +36,19 @@ class TestRotaUsuarios(TestCase):
         self.post(self.payload)
 
         Usuario.objects.get(username=self.payload['nome'])
+
+    def test_post_QUANDO_outro_usuario_existe_ENTAO_cria_mensagem(self) -> None:
+        FabricaTesteUsuario.create()
+
+        self.post(self.payload)
+
+        mensagens = Mensagem.objects.all()
+        self.assertEqual(len(mensagens), 1)
+
+    def test_post_QUANDO_outro_usuario_existe_ENTAO_cria_ultima_mensagem(self) -> None:
+        FabricaTesteUsuario.create()
+
+        self.post(self.payload)
+
+        ultimas_mensagens = UltimaMensagem.objects.all()
+        self.assertEqual(len(ultimas_mensagens), 1)
