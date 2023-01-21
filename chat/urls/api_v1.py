@@ -8,5 +8,6 @@ urlpatterns = [
     path('usuarios/', views.UsuariosView.as_view(), name='usuarios'),
     path('usuarios/<uuid:usuario_id>', views.UltimasMensagemsView.as_view(), name='ultimas_mensagens'),
     path('usuarios/<uuid:usuario_id>/<uuid:destino_id>', views.ConversaView.as_view(), name='conversa'),
-    path('login/', views.LoginView.as_view(), name='login')
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('ping/', views.PingView.as_view(), name='ping')
 ]
