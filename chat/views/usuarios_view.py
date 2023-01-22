@@ -18,20 +18,21 @@ class UsuariosView(APIView):
             )
 
         except ValidationError:
-            nome = request.data['nome']
-            senha = request.data['senha']
-            limites = NovoUsuarioOTDSerializer.limites()
-            mensagem = ''
-            if len(nome) < limites.nome.tamanho_minimo:
-                mensagem = f'Nome deve ter no mínimo {limites.nome.tamanho_minimo} caracteres. '
-            elif len(nome) > limites.nome.tamanho_maximo:
-                mensagem = f'Nome deve ter no máximo {limites.nome.tamanho_maximo} caracteres. '
-            if len(senha) < limites.senha.tamanho_minimo:
-                mensagem += f'Senha deve ter no mínimo {limites.senha.tamanho_minimo} caracteres.'
-            elif len(senha) > limites.senha.tamanho_maximo:
-                mensagem += f'Senha deve ter no máximo {limites.senha.tamanho_maximo} caracteres.'
-            if not mensagem:
-                mensagem = 'Usuário ou senha inválidos'
+            mensagem = 'Usuário ou senha inválidos'
+            try:
+                nome = request.data['nome']
+                senha = request.data['senha']
+                limites = NovoUsuarioOTDSerializer.limites()
+                if len(nome) < limites.nome.tamanho_minimo:
+                    mensagem = f'Nome deve ter no mínimo {limites.nome.tamanho_minimo} caracteres. '
+                elif len(nome) > limites.nome.tamanho_maximo:
+                    mensagem = f'Nome deve ter no máximo {limites.nome.tamanho_maximo} caracteres. '
+                if len(senha) < limites.senha.tamanho_minimo:
+                    mensagem += f'Senha deve ter no mínimo {limites.senha.tamanho_minimo} caracteres.'
+                elif len(senha) > limites.senha.tamanho_maximo:
+                    mensagem += f'Senha deve ter no máximo {limites.senha.tamanho_maximo} caracteres.'
+            except KeyError:
+                pass
             return Response(
                 data=mensagem,
                 status=400

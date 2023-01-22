@@ -3,3 +3,4 @@ from .novo_cliente_otd_serializer import NovoClienteOTDSerializer
 from .nova_mensagem_otd_serializer import NovaMensagemOTDSerializer
 from .mensagem_otd_serializer import MensagemOTDSerializer
 from .ultima_mensagem_otd_serializer import UltimaMensagemOTDSerializer
+from .conversa_otd_serializer import ConversaOTDSerializer

@@ -24,9 +24,6 @@ class TestRotaConversa(TestCase):
             content_type='application/json'
         )
 
-    def test_foo(self):
-        pass
-
     def test_get_QUANDO_usuario_existe_ENTAO_retorna_status_200(self) -> None:
         response = self.get()
 
@@ -49,6 +46,6 @@ class TestRotaConversa(TestCase):
 
         response = self.get()
 
-        datas_na_response = [otd['texto'] for otd in response.data]
+        datas_na_response = [otd['texto'] for otd in response.data['mensagens']]
         datas_esperadas = ([mensagem.texto for mensagem in mensagens])
         self.assertEqual(datas_na_response, datas_esperadas)
