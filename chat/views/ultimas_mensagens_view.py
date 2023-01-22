@@ -11,7 +11,7 @@ from chat.serializers import UltimaMensagemOTDSerializer
 
 class UltimasMensagemsView(APIView):
     def get(self, _: Request, usuario_id: UUID) -> Response:
-        ultimas_mensagens = UltimaMensagemRepositorio.trazer(usuario_id)
+        ultimas_mensagens = UltimaMensagemRepositorio.trazer_todas(usuario_id)
         otds = [UltimaMensagemOTD.de_modelo(ultima_mensagem, usuario_id) for ultima_mensagem in ultimas_mensagens]
         serializer = UltimaMensagemOTDSerializer(otds, many=True)
 

@@ -1,2 +1,3 @@
 from .ultima_mensagem_repositorio import UltimaMensagemRepositorio
 from .mensagem_repositorio import MensagemRepositorio
+from .usuario_repositorio import UsuarioRepositorio

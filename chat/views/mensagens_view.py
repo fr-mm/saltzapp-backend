@@ -3,16 +3,29 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from chat.models import Mensagem, Usuario, UltimaMensagem
 from chat.otds import NovaMensagemOTD
+from chat.repositorios import MensagemRepositorio
 from chat.serializers import NovaMensagemOTDSerializer
+from chat.servicos import BotServico
 
 
 class MensagensView(APIView):
+    __bot_servico = BotServico()
+
     def post(self, request: Request) -> Response:
         try:
-            mensagem = self.__criar_mensagem(request)
-            self.__atualizar_ultima_mensagem(mensagem)
+            serializer = NovaMensagemOTDSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            otd = NovaMensagemOTD(**serializer.validated_data)
+            mensagem = MensagemRepositorio.criar_sem_salvar(
+                origem_id=otd.origem_id,
+                destino_id=otd.destino_id,
+                texto=otd.texto
+            )
+            resposta_do_bot = self.__bot_servico.analisar_mensagem(mensagem)
+            MensagemRepositorio.salvar(mensagem)
+            if resposta_do_bot:
+                MensagemRepositorio.salvar(resposta_do_bot)
 
             return Response(
                 status=201
@@ -22,28 +35,3 @@ class MensagensView(APIView):
             return Response(
                 status=400
             )
-
-    @staticmethod
-    def __criar_mensagem(request: Request) -> Mensagem:
-        serializer = NovaMensagemOTDSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        otd = NovaMensagemOTD(**serializer.validated_data)
-        origem = Usuario.objects.get(pk=otd.origem_id)
-        destino = Usuario.objects.get(pk=otd.destino_id)
-        mensagem = Mensagem(
-            origem=origem,
-            destino=destino,
-            texto=otd.texto
-        )
-        mensagem.save()
-        return mensagem
-
-    @staticmethod
-    def __atualizar_ultima_mensagem(mensagem: Mensagem) -> None:
-        usuarios = sorted([mensagem.origem, mensagem.destino], key=lambda usuario: usuario.id)
-        ultima_mensagem: UltimaMensagem = UltimaMensagem.objects.get(
-            usuario_1=usuarios[0],
-            usuario_2=usuarios[1]
-        )
-        ultima_mensagem.mensagem = mensagem
-        ultima_mensagem.save()

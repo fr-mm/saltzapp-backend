@@ -3,5 +3,5 @@ from .novo_cliente_otd import NovoClienteOTD
 from .nova_mensagem_otd import NovaMensagemOTD
 from .mensagem_otd import MensagemOTD
 from .ultima_mensagem_otd import UltimaMensagemOTD
-from .usuario_simplificado_otd import UsuarioSimplificadoOTD
+from .usuario_otd import UsuarioOTD
 from .conversa_otd import ConversaOTD

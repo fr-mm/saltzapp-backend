@@ -11,8 +11,8 @@ from chat.serializers import MensagemOTDSerializer, UltimaMensagemOTDSerializer
 
 class ConversaView(APIView):
     def get(self, _: Request, usuario_id: UUID, destino_id: UUID) -> Response:
-        mensagens = MensagemRepositorio.trazer(usuario_id, destino_id)
-        ultimas_mensagens = UltimaMensagemRepositorio.trazer(usuario_id)
+        mensagens = MensagemRepositorio.trazer_conversa(usuario_id, destino_id)
+        ultimas_mensagens = UltimaMensagemRepositorio.trazer_todas(usuario_id)
         mensagens_otds = [MensagemOTD.de_modelo(mensagem) for mensagem in mensagens]
         ultimas_mensagens_otds = [UltimaMensagemOTD.de_modelo(ultima_mensagem, usuario_id) for ultima_mensagem in ultimas_mensagens]
         mensagens_serializer = MensagemOTDSerializer(mensagens_otds, many=True)
