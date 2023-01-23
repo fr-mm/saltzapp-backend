@@ -13,7 +13,7 @@ class BotServico:
 
     def analisar_mensagem(self, mensagem: Mensagem) -> Mensagem or None:
         self.__bot = Bot.trazer()
-        if mensagem.destino == BotServico.__bot.usuario:
+        if mensagem.destino == self.__bot.usuario:
             self.__mensagem = mensagem
             self.__texto_da_mensagem = mensagem.texto.strip()
             self.__ultima_mensagem = UltimaMensagemRepositorio.trazer_especifica(

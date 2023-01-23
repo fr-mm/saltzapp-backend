@@ -9,6 +9,7 @@ from chat.models import Mensagem
 
 @dataclass
 class MensagemOTD:
+    id: UUID
     origem_id: UUID
     destino_id: UUID
     enviada_em: datetime
@@ -17,6 +18,7 @@ class MensagemOTD:
     @classmethod
     def de_modelo(cls, modelo: Mensagem) -> MensagemOTD:
         return MensagemOTD(
+            id=modelo.id,
             origem_id=modelo.origem.id,
             destino_id=modelo.destino.id,
             enviada_em=modelo.enviada_em,

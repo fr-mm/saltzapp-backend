@@ -9,6 +9,7 @@ from chat.models import UltimaMensagem
 
 @dataclass
 class UltimaMensagemOTD:
+    id: UUID
     nome_outro_usuario: str
     id_outro_usuario: UUID
     enviada_em: datetime
@@ -25,6 +26,7 @@ class UltimaMensagemOTD:
             nome_outro_usuario = modelo.usuario_1.username
             id_outro_usuario = modelo.usuario_1.id
         return UltimaMensagemOTD(
+            id=modelo.id,
             nome_outro_usuario=nome_outro_usuario,
             id_outro_usuario=id_outro_usuario,
             enviada_em=modelo.mensagem.enviada_em,
