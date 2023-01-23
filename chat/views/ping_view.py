@@ -6,4 +6,4 @@ from rest_framework.views import APIView
 
 class PingView(APIView):
     def get(self, _: Request) -> Response:
-        return redirect('http://localhost:3000/')
+        return redirect('https://fr-mm.github.io/saltzapp/')
