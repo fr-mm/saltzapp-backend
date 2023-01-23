@@ -1,5 +1,3 @@
-import re
-
 from chat import mensagens_de_bot
 from chat.models import Bot, Mensagem, UltimaMensagem, Cliente
 from chat.repositorios import UltimaMensagemRepositorio, MensagemRepositorio, UsuarioRepositorio
@@ -7,13 +5,14 @@ from chat.repositorios.cliente_em_cliacao_repositorio import ClienteEmCriacaoRep
 
 
 class BotServico:
-    __bot = Bot.trazer()
+    __bot: Bot
     __mensagem: Mensagem
     __texto_da_mensagem: str
     __ultima_mensagem: UltimaMensagem
     __texto_da_ultima_mensagem: str
 
     def analisar_mensagem(self, mensagem: Mensagem) -> Mensagem or None:
+        self.__bot = Bot.trazer()
         if mensagem.destino == BotServico.__bot.usuario:
             self.__mensagem = mensagem
             self.__texto_da_mensagem = mensagem.texto.strip()
@@ -113,7 +112,7 @@ class BotServico:
 
     def __criar_resposta(self, texto: str) -> Mensagem:
         return MensagemRepositorio.criar(
-            origem_id=BotServico.__bot.usuario.id,
+            origem_id=self.__bot.usuario.id,
             destino_id=self.__mensagem.origem.id,
             texto=texto
         )
