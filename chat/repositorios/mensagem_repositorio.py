@@ -49,4 +49,4 @@ class MensagemRepositorio:
         mensagens = Mensagem.objects.filter(
             Q(origem=usuario_1, destino=outro_2) | Q(origem=outro_2, destino=usuario_1)
         )
-        return sorted(mensagens, key=lambda mensagem: mensagem.enviada_em)
+        return sorted(mensagens, key=lambda mensagem: mensagem.enviada_em, reverse=True)
